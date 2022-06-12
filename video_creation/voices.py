@@ -70,7 +70,11 @@ def save_text_to_mp3(reddit_obj: dict) -> tuple:
         tts.save(f"assets/mp3/{idx}.mp3")
         length += MP3(f"assets/mp3/{idx}.mp3").info.length
 
+        if length > max_length_in_seconds:
+            length -= MP3(f"assets/mp3/{idx}.mp3").info.length
+            skipped_idx.append(idx)
+
     # Let user know that the MP3 files are saved
     console.log(f"[bold green]Saved {idx + 1} MP3 Files.")
     # Return the index, so we know how many screenshots of comments we need to make.
-    return length, idx
+    return length, idx, skipped_idx
