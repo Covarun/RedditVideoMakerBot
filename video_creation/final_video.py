@@ -25,6 +25,18 @@ def make_final_video(number_of_clips):
     
     print_step("Creating the final video...")
 
+
+    counter = 0
+    for i in range(0,number_of_clips):
+        if i in indices_of_skipped_comments:
+            os.remove(f"assets/mp3/{i}.mp3")
+            os.remove(f"assets/png/comment_{i}.png")
+        else:
+            os.rename(f"assets/mp3/{i}.mp3", f"assets/mp3/{counter}.mp3")
+            os.rename(f"assets//png/comment_{i}.png", f"assets//png/comment_{counter}.png")
+            counter+=1
+    number_of_clips-=len(indices_of_skipped_comments)
+
     VideoFileClip.reW = lambda clip: clip.resize(width=W)
     VideoFileClip.reH = lambda clip: clip.resize(width=H)
 
