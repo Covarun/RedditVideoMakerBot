@@ -32,6 +32,8 @@ def save_text_to_mp3(reddit_obj: dict) -> tuple:
     """
     print_step("Saving Text to MP3 files...")
     length = 0
+    min_length = 50
+    max_length = 60
 
     # Create a folder for the mp3 files.
     Path("assets/mp3").mkdir(parents=True, exist_ok=True)
